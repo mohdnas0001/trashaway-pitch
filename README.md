@@ -1,6 +1,6 @@
 # TRASHAWAY pitch
 
-Slide-style web presentation for TRASHAWAY (Team DreamRise, NITDA Innovation Challenge 2.0), with the demo video on slide 6.
+Slide-style web presentation for TRASHAWAY (Team DreamRise, NITDA Innovation Challenge 2.0), with two Sorty AI slides and the demo video on slide 8.
 
 - Open `index.html` or serve the folder. No build step.
 - Controls: arrow keys, Page Up/Down, Space or Enter for next; swipe on touch; `F` for full screen; `#6` in the URL jumps to a slide.
