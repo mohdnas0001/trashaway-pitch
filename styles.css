@@ -20,10 +20,10 @@ h3{font-size:44px;line-height:1.1}
 .src{position:absolute;left:128px;bottom:56px;font-size:24px;color:var(--soft)}
 .cover{flex-direction:row;align-items:center;gap:64px}
 .cover .l{flex:1;min-width:0;display:flex;flex-direction:column;gap:30px}
-.cover h1{font-size:200px;letter-spacing:-5px;line-height:.9}
+.cover h1{font-size:176px;letter-spacing:-5px;line-height:.9}
 .cover .lead{font-size:46px;line-height:1.25;color:var(--soft);max-width:1000px}
 .cover .meta{font-size:32px;font-weight:700}
-.cover .phone{width:560px;height:auto;flex:none;margin-bottom:40px}
+.cover .phone{width:500px;height:auto;flex:none;margin-bottom:40px}
 .street{position:absolute;left:0;bottom:0;width:1920px;height:208px;object-fit:cover}
 .pad{padding-bottom:250px}
 .stats{display:flex;gap:80px;align-items:center;flex:1}
@@ -136,3 +136,18 @@ body{transition:background .7s cubic-bezier(.22,.61,.36,1)}
 .s6{gap:28px}.s6 .card{padding:28px 32px}
 .fut{gap:30px}.fut .row{gap:24px!important}
 .fut .card{padding:24px 30px;gap:8px}.fut .card h3{font-size:40px}.fut .card p{font-size:26px}.fut .card .ic{width:56px;height:56px}
+
+/* moving trucks */
+.truck{position:absolute;left:0;bottom:0;width:351px;height:162px;transform:translateX(1250px);pointer-events:none}
+.truck img{width:100%;height:auto;display:block}
+.truck.t2{transform:translateX(300px)}
+.truck.t2 img{transform:scaleX(-1)}
+.slide.active .t1{animation:driveL 20s linear infinite;animation-delay:-5s}
+.slide.active .t2{animation:driveR 22s linear infinite;animation-delay:-8s}
+.slide.active .t1 img{animation:bump .45s ease-in-out infinite alternate}
+.slide.active .t2 img{animation:bumpf .55s ease-in-out infinite alternate}
+@keyframes driveL{from{transform:translateX(1980px)}to{transform:translateX(-400px)}}
+@keyframes driveR{from{transform:translateX(-300px)}to{transform:translateX(2000px)}}
+@keyframes bump{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+@keyframes bumpf{from{transform:scaleX(-1) translateY(0)}to{transform:scaleX(-1) translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){.slide.active .truck,.slide.active .truck img{animation:none}}
