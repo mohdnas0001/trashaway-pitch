@@ -60,7 +60,7 @@
 <div><b>Always a fallback</b><span>If the AI is down, the normal form works</span></div></div></div></section>
 
 <section class="slide dark" data-bg="#10201A"><div class="head"><p class="eyebrow">SORTY AI · LANGUAGES</p><h2>Ask in your language. Sorty answers in it.</h2></div>
-<div class="row c4 lang"><div class="lc rv" style="--i:0"><div class="lh"><b>Hausa</b><span>“Sannu”</span></div><div class="frame"><img src="assets/sorty/ha.jpg" alt="Sorty AI chat in Hausa" style="animation-delay:0s"></div><p>Plastic water bottles: reuse, and why not to burn them.</p></div><div class="lc rv" style="--i:1"><div class="lh"><b>Igbo</b><span>“Ndewo”</span></div><div class="frame"><img src="assets/sorty/ig.jpg" alt="Sorty AI chat in Igbo" style="animation-delay:-3s"></div><p>What recycling does for the environment.</p></div><div class="lc rv" style="--i:2"><div class="lh"><b>Yorùbá</b><span>“Báwo ni”</span></div><div class="frame"><img src="assets/sorty/yo.jpg" alt="Sorty AI chat in Yorùbá" style="animation-delay:-6s"></div><p>Plastic bottles and old papers, then booking a pickup.</p></div><div class="lc rv" style="--i:3"><div class="lh"><b>Pidgin</b><span>“Abeg hello”</span></div><div class="frame"><img src="assets/sorty/pcm.jpg" alt="Sorty AI chat in Pidgin" style="animation-delay:-9s"></div><p>A Maltina can, and how to book a pickup.</p></div></div></section>
+<div class="row c4 lang"><div class="lc rv" style="--i:0"><div class="lh"><b>Hausa</b><span>“Sannu”</span></div><div class="frame" data-lang="ha" role="img" aria-label="Sorty AI chat in Hausa (animated conversation)"></div><p>Plastic water bottles: reuse, and why not to burn them.</p></div><div class="lc rv" style="--i:1"><div class="lh"><b>Igbo</b><span>“Ndewo”</span></div><div class="frame" data-lang="ig" role="img" aria-label="Sorty AI chat in Igbo (animated conversation)"></div><p>What recycling does for the environment.</p></div><div class="lc rv" style="--i:2"><div class="lh"><b>Yorùbá</b><span>“Báwo ni”</span></div><div class="frame" data-lang="yo" role="img" aria-label="Sorty AI chat in Yorùbá (animated conversation)"></div><p>Plastic bottles and old papers, then booking a pickup.</p></div><div class="lc rv" style="--i:3"><div class="lh"><b>Pidgin</b><span>“Abeg hello”</span></div><div class="frame" data-lang="pcm" role="img" aria-label="Sorty AI chat in Pidgin (animated conversation)"></div><p>A Maltina can, and how to book a pickup.</p></div></div></section>
 
 <section class="slide dark" data-bg="#10201A"><div class="head"><p class="eyebrow">LIVE DEMO</p><h2>Book a pickup by chatting with the AI assistant</h2></div>
 <div class="demo"><video controls playsinline preload="metadata" poster="assets/poster.jpg"><source src="assets/demo.mp4" type="video/mp4">Your browser cannot play this video. <a href="assets/demo.mp4">Download it</a>.</video>
@@ -110,7 +110,7 @@ document.body.style.background=slides[n].dataset.bg;document.body.classList.togg
 document.getElementById('bar').style.width=((n+1)/slides.length*100)+'%';
 document.getElementById('count').textContent=(n+1)+' / '+slides.length;
 slides.forEach(function(s){var v=s.querySelector('video');if(v&&s!==slides[n])v.pause()});
-try{history.replaceState(null,'','#'+(n+1))}catch(e){}}
+try{history.replaceState(null,'','#'+(n+1))}catch(e){}document.dispatchEvent(new CustomEvent('slidechange'))}
 function nx(){go(i+1)}function pv(){go(i-1)}
 var dots=document.getElementById('dots');slides.forEach(function(s,k){var b=document.createElement('button');b.setAttribute('aria-label','Go to slide '+(k+1));b.onclick=function(){go(k)};dots.appendChild(b)});
 var lock=0;addEventListener('wheel',function(e){if(e.target.tagName==='VIDEO')return;var now=Date.now();if(now-lock<900||Math.abs(e.deltaY)<20)return;lock=now;e.deltaY>0?nx():pv()},{passive:true});
@@ -127,4 +127,41 @@ addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouch
 addEventListener('mousemove',function(){document.body.classList.add('show');clearTimeout(window._h);window._h=setTimeout(function(){document.body.classList.remove('show')},2000)});
 var h=parseInt(location.hash.slice(1),10);go(isNaN(h)?0:h-1);
 })();
-</script></body></html>
+</script><script>
+var CHATS={"ha":{"W":720,"foot":"ha/foot.png","fh":99,"segs":[{"t":"head","s":"ha/0.png","g":0,"h":45},{"t":"head","s":"ha/1.png","g":29,"h":77},{"t":"bot","s":"ha/2.png","g":27,"h":277},{"t":"user","s":"ha/3.png","g":18,"h":84},{"t":"bot","s":"ha/4.png","g":18,"h":353}]},"ig":{"W":720,"foot":"ig/foot.png","fh":99,"segs":[{"t":"head","s":"ig/0.png","g":0,"h":78},{"t":"bot","s":"ig/1.png","g":25,"h":278},{"t":"user","s":"ig/2.png","g":20,"h":119},{"t":"bot","s":"ig/3.png","g":19,"h":499}]},"yo":{"W":720,"foot":"yo/foot.png","fh":83,"segs":[{"t":"user","s":"yo/0.png","g":0,"h":119},{"t":"bot","s":"yo/1.png","g":18,"h":497},{"t":"user","s":"yo/2.png","g":18,"h":121},{"t":"bot","s":"yo/3.png","g":18,"h":101}]},"pcm":{"W":720,"foot":"pcm/foot.png","fh":98,"segs":[{"t":"bot","s":"pcm/0.png","g":0,"h":241},{"t":"user","s":"pcm/1.png","g":18,"h":84},{"t":"bot","s":"pcm/2.png","g":18,"h":278},{"t":"user","s":"pcm/3.png","g":20,"h":82},{"t":"bot","s":"pcm/4.png","g":18,"h":281}]}};
+(function(){
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function sleep(ms,tok){return new Promise(function(res,rej){setTimeout(function(){tok.dead?rej('x'):res()},ms)})}
+function Player(frame){
+ var k=frame.dataset.lang,D=CHATS[k],tok={dead:true},cv,tk,ft,sc;
+ function layout(){frame.innerHTML='';cv=document.createElement('div');cv.className='cv';tk=document.createElement('div');tk.className='tk';cv.appendChild(tk);
+  ft=document.createElement('img');ft.className='ft';ft.src='assets/sorty/'+D.foot;ft.alt='';frame.appendChild(cv);frame.appendChild(ft);
+  sc=frame.clientWidth/D.W;cv.style.height=(frame.clientHeight-D.fh*sc-4)+'px';}
+ function mt(g){return (g/D.W*100)+'%'}
+ function img(s){var i=document.createElement('img');i.src='assets/sorty/'+s.s;i.alt='';i.className='seg '+s.t;i.style.marginTop=mt(s.g);return i}
+ function scroll(ms){var ty=Math.min(0,cv.clientHeight-tk.offsetHeight-14);tk.style.transition='transform '+ms+'ms cubic-bezier(.22,.61,.36,1)';tk.style.transform='translateY('+ty+'px)'}
+ async function run(){
+  tok.dead=true;tok={dead:false};var t=tok;layout();
+  if(reduce){D.segs.forEach(function(s){tk.appendChild(img(s))});scroll(0);return}
+  try{
+   while(!t.dead){
+    layout();frame.classList.remove('out');
+    var first=D.segs.filter(function(s){return s.t==='head'});
+    first.forEach(function(s){var e=img(s);e.classList.add('pop');tk.appendChild(e)});
+    await sleep(700,t);
+    var msgs=D.segs.filter(function(s){return s.t!=='head'});
+    for(var n=0;n<msgs.length;n++){var s=msgs[n];
+     if(s.t==='user'){await sleep(n?1100:300,t);var e=img(s);e.classList.add('pop');tk.appendChild(e);scroll(500)}
+     else{await sleep(n?600:200,t);var ty=document.createElement('div');ty.className='typing';ty.style.marginTop=mt(s.g);ty.innerHTML='<i></i><i></i><i></i>';tk.appendChild(ty);scroll(400);
+      await sleep(1100,t);tk.removeChild(ty);var b=img(s);var d=Math.round(Math.max(1200,Math.min(3000,s.h*sc*6)));b.style.animationDuration=d+'ms';b.classList.add('wipe');tk.appendChild(b);scroll(d);await sleep(d+200,t)}}
+    await sleep(3800,t);frame.classList.add('out');await sleep(600,t)}
+  }catch(e){}
+ }
+ return {play:run,stop:function(){tok.dead=true}}
+}
+var players=[].map.call(document.querySelectorAll('.frame[data-lang]'),function(f){return {f:f,p:Player(f)}});
+function sync(){players.forEach(function(o){var on=o.f.closest('.slide').classList.contains('active');if(on&&!o.on){o.on=true;o.p.play()}else if(!on&&o.on){o.on=false;o.p.stop()}})}
+document.addEventListener('slidechange',sync);setTimeout(sync,50);
+})();
+</script>
+</body></html>
