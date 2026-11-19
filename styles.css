@@ -162,3 +162,4 @@ body{transition:background .7s cubic-bezier(.22,.61,.36,1)}
 @keyframes wipe{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
 @keyframes dot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-5px);opacity:1}}
 .lc{min-width:0}
+.ld{position:absolute;inset:0;display:grid;place-items:center;color:#5b6b60;font-weight:700;font-size:26px}

@@ -131,6 +131,10 @@ var h=parseInt(location.hash.slice(1),10);go(isNaN(h)?0:h-1);
 var CHATS={"ha":{"W":720,"foot":"ha/foot.png","fh":99,"segs":[{"t":"head","s":"ha/0.png","g":0,"h":45},{"t":"head","s":"ha/1.png","g":29,"h":77},{"t":"bot","s":"ha/2.png","g":27,"h":277},{"t":"user","s":"ha/3.png","g":18,"h":84},{"t":"bot","s":"ha/4.png","g":18,"h":353}]},"ig":{"W":720,"foot":"ig/foot.png","fh":99,"segs":[{"t":"head","s":"ig/0.png","g":0,"h":78},{"t":"bot","s":"ig/1.png","g":25,"h":278},{"t":"user","s":"ig/2.png","g":20,"h":119},{"t":"bot","s":"ig/3.png","g":19,"h":499}]},"yo":{"W":720,"foot":"yo/foot.png","fh":83,"segs":[{"t":"user","s":"yo/0.png","g":0,"h":119},{"t":"bot","s":"yo/1.png","g":18,"h":497},{"t":"user","s":"yo/2.png","g":18,"h":121},{"t":"bot","s":"yo/3.png","g":18,"h":101}]},"pcm":{"W":720,"foot":"pcm/foot.png","fh":98,"segs":[{"t":"bot","s":"pcm/0.png","g":0,"h":241},{"t":"user","s":"pcm/1.png","g":18,"h":84},{"t":"bot","s":"pcm/2.png","g":18,"h":278},{"t":"user","s":"pcm/3.png","g":20,"h":82},{"t":"bot","s":"pcm/4.png","g":18,"h":281}]}};
 (function(){
 var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var PRE={};
+function preload(k){if(PRE[k])return PRE[k];var D=CHATS[k],urls=[D.foot].concat(D.segs.map(function(s){return s.s}));
+ PRE[k]=Promise.all(urls.map(function(u){return new Promise(function(r){var i=new Image();i.onload=i.onerror=function(){r()};i.src='assets/sorty/'+u;if(i.decode)i.decode().then(r,r)})}));return PRE[k]}
+Object.keys(CHATS).forEach(preload);
 function sleep(ms,tok){return new Promise(function(res,rej){setTimeout(function(){tok.dead?rej('x'):res()},ms)})}
 function Player(frame){
  var k=frame.dataset.lang,D=CHATS[k],tok={dead:true},cv,tk,ft,sc;
@@ -141,7 +145,7 @@ function Player(frame){
  function img(s){var i=document.createElement('img');i.src='assets/sorty/'+s.s;i.alt='';i.className='seg '+s.t;i.style.marginTop=mt(s.g);return i}
  function scroll(ms){var ty=Math.min(0,cv.clientHeight-tk.offsetHeight-14);tk.style.transition='transform '+ms+'ms cubic-bezier(.22,.61,.36,1)';tk.style.transform='translateY('+ty+'px)'}
  async function run(){
-  tok.dead=true;tok={dead:false};var t=tok;layout();
+  tok.dead=true;tok={dead:false};var t=tok;frame.innerHTML='<div class="ld">Loading chat…</div>';await Promise.race([preload(k),new Promise(function(r){setTimeout(r,15000)})]);if(t.dead)return;layout();
   if(reduce){D.segs.forEach(function(s){tk.appendChild(img(s))});scroll(0);return}
   try{
    while(!t.dead){
